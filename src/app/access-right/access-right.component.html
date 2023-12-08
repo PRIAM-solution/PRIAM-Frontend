@@ -1,0 +1,39 @@
+<h3 class="text-center text-black"> My personal data</h3>
+<div class= "container"  >
+  <div class ="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-body">
+        <div class="input-group">
+          <label class="input-group-text"> User ID </label>
+          <input class="form-control" type="number" name="idRef" [(ngModel)]="idRef">
+          <button class="btn btn-success" (click)="DataListByDSC()"> OK </button>
+        </div>
+        <div class="form-group" id="accessRight">
+          <label class="input-group-text"> Choose data type </label>
+          <select class="form-select" aria-label="Disabled select example" name="dataType" id="dataType" [(ngModel)]="selectedValue"  (change)="PersonalDataByDataType()">
+            <option *ngFor="let dataType of uniqueDataTypes">{{ dataType}}</option>
+          </select>
+          <div class="mb-3">
+            <table class="table table-bordered">
+              <thead class="thead-dark">
+              <tr>
+                <th *ngFor="let attribute of uniqueAttributes">{{ attribute }}</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let attributeValue of attributeValues ; let i = index">
+                <td *ngFor="let attribute of uniqueAttributes">{{ attributeValue[attribute] }}</td>
+                <td>
+                  <button class="btn btn-success" (click)="handleButtonClick(i)" routerLink="/new-rectification-request">Rectify</button>
+                  <button class="btn btn-danger"  (click)="handleButtonClick(i)" routerLink="/new-erasure-request">Erase</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

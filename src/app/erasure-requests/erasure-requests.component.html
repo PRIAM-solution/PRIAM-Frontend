@@ -1,0 +1,23 @@
+<h3 class="text-center text-black"> List of erasure requests</h3>
+<div class="container">
+  <div class="panel panel-primary">
+    <!--    <div class="text-center text-black"class="panel-heading"> List of rectifications requests </div>-->
+    <div class="mb-3">
+
+      <!--      <button class="btn btn-primary" (click)="onGetRectificationRequests()"> Requests </button>-->
+      <table class="table table-bordered" *ngIf="ErasureRequests">
+        <tr>
+          <th>ID</th><th>Username</th><th>Data</th><th>Claim</th><th>Date of claim</th>
+        </tr>
+        <tr *ngFor="let r of ErasureRequests">
+          <td> {{r.id}}</td>
+          <td> {{r.dataSubject.id}}</td>
+          <td> {{r.data.attribute}}</td>
+          <td> {{r.claim}}</td>
+          <td> {{r.claimDate| date:'EEEE, MMMM d, yyyy'}}</td>
+          <td> <a class="btn btn-danger" routerLink="/erasure-answer" (click)="OnGetErasureResponse(r)" > Answer </a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

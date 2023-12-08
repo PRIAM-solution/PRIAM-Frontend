@@ -1,0 +1,29 @@
+<h3 class="text-center text-black"> Response to request number {{id}} </h3>
+<div class="col-md-6 col-sm-6 col-xs-12" >
+  <div class ="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-body">
+
+        <form #f="ngForm" id="answerRequest"  >
+
+          <div class="form-group">
+            <!--            <label class="control-label"> Data request id </label>-->
+            <input class="form-control" type="hidden" name="idDataRequest" [ngModel]="id">
+            <div class="form-group">
+              <label for="answer">Response yes/no</label><br />
+              <select class="form-select" name="answer" id="answer" form="answerRequest" [(ngModel)]="answer.answer">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select>
+
+              <label class="control-label"> Claim response </label>
+              <input class="form-control" type="text" name="claimAnswer" [(ngModel)]="answer.claimAnswer">
+            </div>
+          </div>
+          <button class="btn btn-success" type="submit" (click)="onSaveRecResponse(answer)" routerLink="/erasure-requests" > Save </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

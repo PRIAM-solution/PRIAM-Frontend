@@ -1,0 +1,25 @@
+<h3 class="text-center text-black"> ERASURE REQUEST</h3>
+<div class="col-md-6 col-sm-6 col-xs-12" >
+  <div class ="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-body">
+
+        <form  #f="ngForm" id="rectify"  >
+          <div class="form-group">
+            <!--<label class="control-label"> Patient ID </label>
+            <input class="form-control" type="text" name="idRef" ngModel>-->
+            <label for="attribute">Data</label><br />
+            <select class="form-select" name="rectifData.attribute" id="attribute" form="rectify" [(ngModel)]="rectifData.attribute" >
+              <option *ngFor="let dataAttribute of attributes">{{ dataAttribute}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label"> Claim </label>
+            <input class="form-control" type="text" name="claim" [(ngModel)]="rectifData.claim">
+          </div>
+          <button class="btn btn-success" type="submit" (click)="onSaveErasureRequest(rectifData)" routerLink="/access-right"> Save </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
