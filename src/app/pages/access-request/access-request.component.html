@@ -1,0 +1,96 @@
+<h1>Access Request</h1>
+<button mat-flat-button color="primary" routerLink="/ar-selection">Do an access Request</button>
+<h1>Data List</h1>
+<div *ngFor="let dataType of dataList">
+  <h2>{{ dataType.dataTypeName }}</h2>
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let data of dataType.data">{{ data.dataName }}</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of dataType.data[0].dataValue; let i = index">
+        <td *ngFor="let data of dataType.data">
+          {{ data.dataValue[i] }}
+        </td>
+        <td>
+          <button mat-flat-button color="primary" (click)="getPrimaryKeys(dataType, i); getNonPrimaryKeysData(dataType, i)" routerLink="/rectification"><i class="material-icons" style="font-size: 4vh;">create</i></button>
+          <button mat-flat-button color="accent" routerLink="/suppression"><i class="material-icons" style="font-size: 4vh;">delete</i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h1>Data List By Purpose</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Processing Name</th>
+      <th>Purpose</th>
+      <th>Attribute</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of dataListByPurpose">
+      <td>{{ item.processingName }}</td>
+      <td>
+        <div *ngFor="let purpose of item.purposes">{{ purpose.purposeDescription }}</div>
+      </td>
+      <td>
+        <div *ngFor="let data of item.data">{{ data.dataName }}</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h1>Data List Transfer (EU countries)</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Secondary Actor Category</th>
+      <th>Country</th>
+      <th>Processed Data List</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let actor of euActors">
+      <td>{{ actor.secondaryActorName }}</td>
+      <td>{{ actor.secondaryActorCategory }}</td>
+      <td>{{ actor.country }}</td>
+      <td>
+        <div *ngFor="let data of actor.data">
+          {{ data.dataName }}<br>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h1>Data List Transfer (Non EU countries)</h1>
+<table *ngIf="hasActorOutsideEu(dataListTransfer)">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Secondary Actor Category</th>
+      <th>Country</th>
+      <th>Processed Data List</th>
+      <th>Safeguard Type</th>
+      <th>Safeguard</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let actor of nonEuActors">
+      <td>{{ actor.secondaryActorName }}</td>
+      <td>{{ actor.secondaryActorCategory }}</td>
+      <td>{{ actor.country }}</td>
+      <td>
+        <div *ngFor="let data of actor.data">
+          {{ data.dataName }}<br>
+        </div>
+      </td>
+      <td>{{ actor.safeguardType }}</td>
+      <td>{{ actor.safeguard }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,46 +1,61 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+// DEFAULT
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { AccessRightComponent } from './access-right/access-right.component';
-import { RectificationRequestsComponent } from './rectification-requests/rectification-requests.component';
-import { NewRectificationRequestComponent } from './new-rectification-request/new-rectification-request.component';
-import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
-import { RectificationAnswerComponent } from './rectification-answer/rectification-answer.component';
-import { NewErasureRequestComponent } from './new-erasure-request/new-erasure-request.component';
-import { ErasureRequestsComponent } from './erasure-requests/erasure-requests.component';
-import { ErasureAnswerComponent } from './erasure-answer/erasure-answer.component';
-import {ProcessingComponent} from "./processing/processing.component";
-import {ProcessingDetailsComponent} from "./processing-details/processing-details.component";
-import {ContractComponent} from "./contract/contract.component";
-import {ConsentComponent} from "./consent/consent.component";
-import {DataComponent} from "./data/data.component";
+// ANGULAR MATERIALS
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+// ADDED MODULES
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+// ADDED COMPONENTS
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { AccessRequestComponent } from './pages/access-request/access-request.component';
+import { RequestsComponent } from './pages/requests/requests.component';
+import { ConsentComponent } from './pages/consent/consent.component';
+import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { ArSelectionComponent } from './pages/ar-selection/ar-selection.component';
+import { RightsComponent } from './pages/rights/rights.component';
+import { RectificationComponent } from './pages/rectification/rectification.component';
+import { SuppressionComponent } from './pages/suppression/suppression.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    AccessRightComponent,
-    RectificationRequestsComponent,
-    NewRectificationRequestComponent,
-    RectificationAnswerComponent,
-    NewErasureRequestComponent,
-    ErasureRequestsComponent,
-    ErasureAnswerComponent,
-    ProcessingComponent,
-    ProcessingDetailsComponent,
-    ContractComponent,
+    AccessRequestComponent,
+    RequestsComponent,
     ConsentComponent,
-    DataComponent
+    LoginComponent,
+    HomeComponent,
+    FooterComponent,
+    ArSelectionComponent,
+    RightsComponent,
+    RectificationComponent,
+    SuppressionComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    MatToolbarModule,
+    MatGridListModule,
+    MatButtonModule,
+    MatSlideToggleModule,
+    MatMenuModule,
+    MatTableModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
