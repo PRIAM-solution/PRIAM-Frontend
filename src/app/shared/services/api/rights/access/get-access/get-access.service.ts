@@ -7,6 +7,7 @@ import { SecondaryActor } from '../../../../../../interfaces/data-list-transfer'
 import { IndirectGeneratedDataList } from '../../../../../../interfaces/indirect-generated-data-list';
 import { PrimaryKey } from '../../../../../../interfaces/rectification';
 import { NonPrimaryKey } from '../../../../../../interfaces/rectification';
+import {environment} from "../../../../../../../environment/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -14,23 +15,23 @@ import { NonPrimaryKey } from '../../../../../../interfaces/rectification';
 export class GetAccessService {
   constructor(private httpClient: HttpClient) { }
 
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = environment.api_data;
   primaryKeys!: PrimaryKey[];
   nonPrimaryKeys!: NonPrimaryKey[];
 
   getPersonalDataList(referenceId: number): Observable<DataType[]> {
-    return this.httpClient.get<DataType[]>(`${this.baseUrl}/data/getPersonalDataList/${referenceId}`);
+    return this.httpClient.get<DataType[]>(`${this.baseUrl}/data/processedPersonalDataList/${referenceId}`);
   }
 
   getPersonalDataListByPurpose(referenceId: number): Observable<Processing[]> {
-    return this.httpClient.get<Processing[]>(`${this.baseUrl}/data/getPersonalDataListByPurpose/${referenceId}`);
+    return this.httpClient.get<Processing[]>(`${this.baseUrl}/data/processedPersonalDataList/purposes/${referenceId}`);
   }
 
   getPersonalDataListTransfer(referenceId: number): Observable<SecondaryActor[]> {
-    return this.httpClient.get<SecondaryActor[]>(`${this.baseUrl}/data/getPersonalDataListTransfer/${referenceId}`);
+    return this.httpClient.get<SecondaryActor[]>(`${this.baseUrl}/data/processedPersonalDataList/transfer/${referenceId}`);
   }
 
   getIndirectAndGeneratedDataList(referenceId: number): Observable<IndirectGeneratedDataList[]> {
-    return this.httpClient.get<IndirectGeneratedDataList[]>(`${this.baseUrl}/data/getIndirectAndGeneratedDataList/${referenceId}`);
+    return this.httpClient.get<IndirectGeneratedDataList[]>(`${this.baseUrl}/data/processedIndirectAndProducedPersonalDataList/${referenceId}`);
   }
 }
