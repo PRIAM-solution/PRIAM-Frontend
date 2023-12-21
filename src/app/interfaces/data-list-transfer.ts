@@ -1,5 +1,5 @@
 interface Data {
-  dataName: string;
+  attributeName: string;
 }
 
 export interface SecondaryActor {

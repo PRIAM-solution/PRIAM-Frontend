@@ -22,7 +22,7 @@ export class AccessRequestComponent implements OnInit {
     private successErrorService: SuccessErrorService,
   ) {}
 
-  idRef: number = 0;
+  idRef: number = 606;
   dataList: DataType[] = [];
   dataListByPurpose: Processing[] = [];
   dataListTransfer : SecondaryActor[] = [];
@@ -81,7 +81,7 @@ export class AccessRequestComponent implements OnInit {
       .filter((data: any) => data.isPrimaryKey)
       .map((data: any) => ({
         primaryKeyValue: data.dataValue[rowIndex],
-        primaryKeyName: data.dataName
+        primaryKeyName: data.attributeName
       }
     ));
   }
@@ -91,7 +91,7 @@ export class AccessRequestComponent implements OnInit {
     .filter((data: any) => !data.isPrimaryKey)
     .map((data: any) => ({
       dataValue: data.dataValue[rowIndex],
-      dataName: data.dataName,
+      dataName: data.attributeName,
       dataId: data.dataId,
       dataType: dataType.dataTypeName
     }));
