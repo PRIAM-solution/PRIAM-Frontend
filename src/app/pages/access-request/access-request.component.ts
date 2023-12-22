@@ -4,11 +4,6 @@ import { SuccessErrorService } from '../../shared/services/success-error/success
 import { DataType } from '../../interfaces/data-list';
 import { Processing } from '../../interfaces/data-list-purpose';
 import { SecondaryActor } from '../../interfaces/data-list-transfer';
-import { PrimaryKey } from '../../interfaces/rectification';
-//import { DATA_LIST } from './exemple-tempo';
-//import { DATA_LIST_PURPOSE } from './exemple-tempo';
-//import { DATA_LIST_TRANSFER } from './exemple-tempo';
-
 
 @Component({
   selector: 'app-access-request',
@@ -64,6 +59,13 @@ export class AccessRequestComponent implements OnInit {
     this.getAccessService.getPersonalDataListTransfer(this.idRef).subscribe(
       response => {
         this.dataListTransfer = response;
+        console.log(response)
+        console.log(this.dataListTransfer)
+        console.log(this.dataListTransfer[0].country)
+        this.euActors = this.dataListTransfer.filter(actor => this.euCountries.includes(actor.country));
+        this.nonEuActors = this.dataListTransfer.filter(actor => !this.euCountries.includes(actor.country));
+        console.log(this.euActors)
+
         this.successErrorService.handleSuccess('getPersonalDataListTransfer', response);
       },
       error => {
