@@ -1,28 +1,28 @@
 import { DataType } from '../../interfaces/data-list';
 import { Processing } from '../../interfaces/data-list-purpose';
 import { SecondaryActor } from '../../interfaces/data-list-transfer';
-
 export const DATA_LIST: DataType[] = [
   {
     dataTypeName: 'Commands',
     data: [
-      { dataId: 0, dataName: 'Command Number', dataValue: ['143', '192', '205'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category1', source: 'Indirect', isPrimaryKey: true },
-      { dataId: 1, dataName: 'Quantity', dataValue: ['10', '90', '50'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category1', source: 'Indirect', isPrimaryKey: false },
-      { dataId: 2, dataName: 'Date', dataValue: ['10/10', '29/01', '15/05'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category1', source: 'Indirect', isPrimaryKey: false },
+      { dataId: 0, dataName: 'Command Number', dataValue: ['143', '192', '205'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category1', source: 'Indirect', sourceDetails: 'Command Number', isPrimaryKey: true },
+      { dataId: 1, dataName: 'Quantity', dataValue: ['10', '90', '50'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category1', source: 'Indirect', sourceDetails: 'Quantity', isPrimaryKey: false },
+      { dataId: 2, dataName: 'Date', dataValue: ['10/10', '29/01', '15/05'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category1', source: 'Indirect', sourceDetails: 'Date', isPrimaryKey: false },
     ],
   },
   {
     dataTypeName: 'Clients',
     data: [
-      { dataId: 3, dataName: 'Name', dataValue: ['Bob', 'Max', 'Joe', 'Alice'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category1', source: 'Indirect', isPrimaryKey: true },
-      { dataId: 4, dataName: 'Age', dataValue: ['20', '85', '43', '30'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category1', source: 'Indirect', isPrimaryKey: false },
+      { dataId: 3, dataName: 'Name', dataValue: ['Bob', 'Max', 'Joe', 'Alice'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category1', source: 'Indirect', sourceDetails: 'Name', isPrimaryKey: true },
+      { dataId: 4, dataName: 'Age', dataValue: ['20', '85', '43', '30'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category1', source: 'Indirect', sourceDetails: 'Age', isPrimaryKey: false },
+      { dataId: 5, dataName: 'Genre', dataValue: ['Homme', 'Homme', 'Homme', 'Femme'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category1', source: 'Indirect', sourceDetails: 'Genre', isPrimaryKey: false },
     ],
   },
   {
     dataTypeName: 'Products',
     data: [
-      { dataId: 5, dataName: 'Product Name', dataValue: ['Laptop', 'Smartphone', 'Tablet'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category2', source: 'Direct', isPrimaryKey: false },
-      { dataId: 6, dataName: 'Price', dataValue: ['1200', '800', '500'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category2', source: 'Direct', isPrimaryKey: true },
+      { dataId: 6, dataName: 'Product Name', dataValue: ['Laptop', 'Smartphone', 'Tablet'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category2', source: 'Direct', sourceDetails: 'Product Name', isPrimaryKey: false },
+      { dataId: 7, dataName: 'Price', dataValue: ['1200', '800', '500'], dataConservationDuration: '2023-01-01', personalDataCategory: 'Category2', source: 'Direct', sourceDetails: 'Price', isPrimaryKey: true },
     ],
   },
 ];

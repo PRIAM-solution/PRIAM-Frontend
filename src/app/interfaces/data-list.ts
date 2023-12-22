@@ -1,6 +1,6 @@
 interface Data {
   dataId: number;
-  attributeName: string;
+  dataName: string;
   dataValue: any;
   dataConservationDuration?: string;
   personalDataCategory?: string;

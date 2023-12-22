@@ -3,8 +3,10 @@ import { GetAccessService } from '../../shared/services/api/rights/access/get-ac
 import { PostRectificationService } from '../../shared/services/api/rights/rectification/post-rectification/post-rectification.service';
 import { SuccessErrorService } from '../../shared/services/success-error/success-error.service';
 import { PrimaryKey } from '../../interfaces/rectification';
+import { NonPrimaryKey } from '../../interfaces/rectification';
 import { Rectification } from '../../interfaces/rectification';
 import { Data } from '../../interfaces/rectification';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-rectification',
@@ -16,24 +18,65 @@ export class RectificationComponent {
     private getAccessService: GetAccessService,
     private postRectificationService: PostRectificationService,
     private successErrorService: SuccessErrorService,
+    private _snackBar: MatSnackBar,
   ) {}
 
+  primaryKeys: PrimaryKey[] = this.getAccessService.primaryKeys;
+  nonPrimaryKeys: NonPrimaryKey[] = this.getAccessService.nonPrimaryKeys;
+  userClaim: string = '';
+  newValue: any = null; // A MODIF POUR TOUT GERER
+  selectedKey: string = '';
+
   ngOnInit() {
+    console.log(this.primaryKeys);
+    console.log(this.nonPrimaryKeys);
   }
 
-  postRectification() {
-    const rectification: Rectification = {
-      dataSubjectId: 0,
-      dataTypeName: '',
-      data: {dataId: 0},
-      newValue: '',
-      claim: '',
-      primaryKeys: this.getAccessService.primaryKeys,
-    };
-
-    this.postRectificationService.postRectification(rectification).subscribe(
-      response => this.successErrorService.handleSuccess('postRectification', response),
-      error => this.successErrorService.handleError('postRectification', error),
-    );
+  isPrimaryKey(selectedKey: any): boolean {
+    return this.primaryKeys.some(pk => pk.primaryKeyName === selectedKey);
   }
+
+  getDataValue(selectedKey: string): any {
+    const selectedNonPrimaryKey = this.nonPrimaryKeys.find(npk => npk.dataValue === selectedKey);
+    return selectedNonPrimaryKey?.dataValue ?? '';
+  }
+
+  getDataId(selectedKey: string): number {
+    const selectedNonPrimaryKey = this.nonPrimaryKeys.find(npk => npk.dataValue === selectedKey);
+    return selectedNonPrimaryKey?.dataId ?? 0;
+  }
+
+  getDataTypeName(selectedKey: string): string {
+    const selectedNonPrimaryKey = this.nonPrimaryKeys.find(npk => npk.dataValue === selectedKey);
+    return selectedNonPrimaryKey?.dataType ?? '';
+  }
+
+postRectification() {
+  const rectification: Rectification = {
+    dataSubjectId: 0,
+    dataTypeName: this.getDataTypeName(this.selectedKey),
+    data: {dataId: this.getDataId(this.selectedKey)},
+    newValue: this.newValue,
+    claim: this.userClaim,
+    primaryKeys: this.getAccessService.primaryKeys,
+  };
+
+  console.log(rectification);
+
+  this.postRectificationService.postRectification(rectification).subscribe(
+    response => {
+      const message = 'Success!';
+      const action = 'X';
+      this._snackBar.open(message, action);
+      this.successErrorService.handleSuccess('postRectification', response);
+    },
+    error => {
+      const message = 'Error..';
+      const action = 'X';
+      this._snackBar.open(message, action);
+      this.successErrorService.handleError('postRectification', error);
+    }
+  );
+}
+
 }
