@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Rectification } from '../../../../../../interfaces/rectification';
-import {environment} from "../../../../../../../environment/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ import {environment} from "../../../../../../../environment/environment";
 export class PostRectificationService {
   constructor(private httpClient: HttpClient) { }
 
-  private baseUrl = environment.api_right;
+  private baseUrl = 'http://localhost:8080';
 
   postRectification(rectification: Rectification): Observable<Rectification> {
     return this.httpClient.post<Rectification>(`${this.baseUrl}/right/postAccessRequest`, rectification);

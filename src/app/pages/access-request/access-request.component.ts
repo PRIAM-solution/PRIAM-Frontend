@@ -1,9 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { GetAccessService } from '../../shared/services/api/rights/access/get-access/get-access.service';
 import { SuccessErrorService } from '../../shared/services/success-error/success-error.service';
 import { DataType } from '../../interfaces/data-list';
 import { Processing } from '../../interfaces/data-list-purpose';
 import { SecondaryActor } from '../../interfaces/data-list-transfer';
+import { PrimaryKey } from '../../interfaces/rectification';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  MatDialogModule,
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogTitle,
+  MatDialogContent,
+} from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { DATA_LIST } from './exemple-tempo';
+import { DATA_LIST_PURPOSE } from './exemple-tempo';
+import { DATA_LIST_TRANSFER } from './exemple-tempo';
 
 @Component({
   selector: 'app-access-request',
@@ -15,12 +28,14 @@ export class AccessRequestComponent implements OnInit {
   constructor(
     private getAccessService: GetAccessService,
     private successErrorService: SuccessErrorService,
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) {}
 
-  idRef: number = 606;
-  dataList: DataType[] = [];
-  dataListByPurpose: Processing[] = [];
-  dataListTransfer : SecondaryActor[] = [];
+  referenceId: number = 0;
+  dataList: DataType[] = DATA_LIST;
+  dataListByPurpose: Processing[] = DATA_LIST_PURPOSE;
+  dataListTransfer : SecondaryActor[] = DATA_LIST_TRANSFER;
   euCountries = ['Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden'];
   euActors: SecondaryActor[] = this.dataListTransfer.filter(actor => this.euCountries.includes(actor.country));
   nonEuActors: SecondaryActor[] = this.dataListTransfer.filter(actor => !this.euCountries.includes(actor.country));
@@ -32,7 +47,7 @@ export class AccessRequestComponent implements OnInit {
   }
 
   getPersonalDataList() {
-    this.getAccessService.getPersonalDataList(this.idRef).subscribe(
+    this.getAccessService.getPersonalDataList(this.referenceId).subscribe(
       response => {
         this.dataList = response;
         this.successErrorService.handleSuccess('getPersonalDataList', response);
@@ -44,7 +59,7 @@ export class AccessRequestComponent implements OnInit {
   }
 
   getPersonalDataListByPurpose() {
-    this.getAccessService.getPersonalDataListByPurpose(this.idRef).subscribe(
+    this.getAccessService.getPersonalDataListByPurpose(this.referenceId).subscribe(
       response => {
         this.dataListByPurpose = response;
         this.successErrorService.handleSuccess('getPersonalDataListByPurpose', response);
@@ -56,7 +71,7 @@ export class AccessRequestComponent implements OnInit {
   }
 
   getPersonalDataListTransfer() {
-    this.getAccessService.getPersonalDataListTransfer(this.idRef).subscribe(
+    this.getAccessService.getPersonalDataListTransfer(this.referenceId).subscribe(
       response => {
         this.dataListTransfer = response;
         console.log(response)
@@ -74,6 +89,14 @@ export class AccessRequestComponent implements OnInit {
     );
   }
 
+  openDialogAdditionalData(dataItem: any) {
+    this.dialog.open(DialogAdditionalData, {
+      data: {
+        selectedData: dataItem,
+      },
+    });
+  }
+
   hasActorOutsideEu(dataList: SecondaryActor[]): boolean {
     return dataList.some(actor => !this.euCountries.includes(actor.country));
   }
@@ -83,7 +106,7 @@ export class AccessRequestComponent implements OnInit {
       .filter((data: any) => data.isPrimaryKey)
       .map((data: any) => ({
         primaryKeyValue: data.dataValue[rowIndex],
-        primaryKeyName: data.attributeName
+        primaryKeyName: data.dataName
       }
     ));
   }
@@ -93,10 +116,19 @@ export class AccessRequestComponent implements OnInit {
     .filter((data: any) => !data.isPrimaryKey)
     .map((data: any) => ({
       dataValue: data.dataValue[rowIndex],
-      dataName: data.attributeName,
+      dataName: data.dataName,
       dataId: data.dataId,
       dataType: dataType.dataTypeName
     }));
+  }
 }
 
+@Component({
+  selector: 'dialog-additional-data',
+  templateUrl: 'dialog-additional-data.html',
+  standalone: true,
+  imports: [MatDialogModule, CommonModule],
+})
+export class DialogAdditionalData {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 }

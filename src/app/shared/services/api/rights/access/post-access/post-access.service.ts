@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AccessRequest } from '../../../../../../interfaces/access-request';
-import {environment} from "../../../../../../../environment/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ import {environment} from "../../../../../../../environment/environment";
 export class PostAccessService {
   constructor(private httpClient: HttpClient) { }
 
-  private baseUrl = environment.api_right;
+  private baseUrl = 'http://localhost:8080';
 
   postAccessRequest(accessRequest: AccessRequest): Observable<AccessRequest> {
     return this.httpClient.post<AccessRequest>(`${this.baseUrl}/right/postAccessRequest`, accessRequest);

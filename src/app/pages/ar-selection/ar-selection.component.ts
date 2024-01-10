@@ -6,7 +6,8 @@ import { SuccessErrorService } from '../../shared/services/success-error/success
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { IndirectGeneratedDataList } from '../../interfaces/indirect-generated-data-list';
 import { AccessRequest } from '../../interfaces/access-request';
-//import { INDIRECT_GENERATED_DATA_LIST } from './exemple-tempo';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { INDIRECT_GENERATED_DATA_LIST } from './exemple-tempo';
 
 @Component({
   selector: 'app-ar-selection',
@@ -20,11 +21,12 @@ export class ArSelectionComponent implements OnInit {
     private postAccessService: PostAccessService,
     private slideToggleService: SlideToggleService,
     private successErrorService: SuccessErrorService,
+    private _snackBar: MatSnackBar,
   ) {}
 
   referenceId: number = 0;
   selectAll: boolean = false;
-  indirectGeneratedDataList: IndirectGeneratedDataList[] = [];
+  indirectGeneratedDataList: IndirectGeneratedDataList[] = INDIRECT_GENERATED_DATA_LIST;
   dataRequestClaim: string = '';
 
   ngOnInit() {
@@ -63,9 +65,15 @@ export class ArSelectionComponent implements OnInit {
 
     this.postAccessService.postAccessRequest(accessRequest).subscribe(
       response => {
+        const message = 'Success!';
+        const action = 'X';
+        this._snackBar.open(message, action);
         this.successErrorService.handleSuccess('postAccessRequest', response);
       },
       error => {
+        const message = 'Error..';
+        const action = 'X';
+        this._snackBar.open(message, action);
         this.successErrorService.handleError('postAccessRequest', error);
       }
     );

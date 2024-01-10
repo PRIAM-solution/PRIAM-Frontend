@@ -1,5 +1,5 @@
 interface Data {
-  attributeName: string;
+  dataName: string;
 }
 
 interface SecondaryActorCategory {
