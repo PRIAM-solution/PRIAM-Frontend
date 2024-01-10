@@ -57,7 +57,7 @@
   <tbody>
     <tr *ngFor="let actor of euActors">
       <td>{{ actor.name }}</td>
-      <td>{{ actor.secondaryActorCategoryName }}</td>
+      <td>{{ actor.secondaryActorCategory.secondaryActorCategoryName }}</td>
       <td>{{ actor.country }}</td>
       <td>
         <div *ngFor="let data of actor.data">
@@ -82,7 +82,7 @@
   <tbody>
     <tr *ngFor="let actor of nonEuActors">
       <td>{{ actor.name }}</td>
-      <td>{{ actor.secondaryActorCategoryName }}</td>
+      <td>{{ actor.secondaryActorCategory.secondaryActorCategoryName }}</td>
       <td>{{ actor.country }}</td>
       <td>
         <div *ngFor="let data of actor.data">
