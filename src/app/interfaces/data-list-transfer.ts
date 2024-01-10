@@ -2,9 +2,14 @@ interface Data {
   dataName: string;
 }
 
+interface SecondaryActorCategory {
+  secondaryActorCategoryId: number;
+  secondaryActorCategoryName: string;
+}
+
 export interface SecondaryActor {
-  secondaryActorName: string;
-  secondaryActorCategory: string;
+  name: string;
+  secondaryActorCategory: SecondaryActorCategory;
   country: string;
   data: Data[];
   safeguard?: any; // A MODIFIER POUR GERER PDF
