@@ -14,9 +14,6 @@ import {
   MatDialogContent,
 } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
-import { DATA_LIST } from './exemple-tempo';
-import { DATA_LIST_PURPOSE } from './exemple-tempo';
-import { DATA_LIST_TRANSFER } from './exemple-tempo';
 
 @Component({
   selector: 'app-access-request',
@@ -32,10 +29,10 @@ export class AccessRequestComponent implements OnInit {
     public dialog: MatDialog,
   ) {}
 
-  referenceId: number = 0;
-  dataList: DataType[] = DATA_LIST;
-  dataListByPurpose: Processing[] = DATA_LIST_PURPOSE;
-  dataListTransfer : SecondaryActor[] = DATA_LIST_TRANSFER;
+  referenceId: number = 606;
+  dataList: DataType[] = [];
+  dataListByPurpose: Processing[] = [];
+  dataListTransfer : SecondaryActor[] = [];
   euCountries = ['Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden'];
   euActors: SecondaryActor[] = this.dataListTransfer.filter(actor => this.euCountries.includes(actor.country));
   nonEuActors: SecondaryActor[] = this.dataListTransfer.filter(actor => !this.euCountries.includes(actor.country));
@@ -74,13 +71,8 @@ export class AccessRequestComponent implements OnInit {
     this.getAccessService.getPersonalDataListTransfer(this.referenceId).subscribe(
       response => {
         this.dataListTransfer = response;
-        console.log(response)
-        console.log(this.dataListTransfer)
-        console.log(this.dataListTransfer[0].country)
         this.euActors = this.dataListTransfer.filter(actor => this.euCountries.includes(actor.country));
         this.nonEuActors = this.dataListTransfer.filter(actor => !this.euCountries.includes(actor.country));
-        console.log(this.euActors)
-
         this.successErrorService.handleSuccess('getPersonalDataListTransfer', response);
       },
       error => {
@@ -106,7 +98,7 @@ export class AccessRequestComponent implements OnInit {
       .filter((data: any) => data.isPrimaryKey)
       .map((data: any) => ({
         primaryKeyValue: data.dataValue[rowIndex],
-        primaryKeyName: data.dataName
+        primaryKeyName: data.attributeName
       }
     ));
   }
@@ -116,7 +108,7 @@ export class AccessRequestComponent implements OnInit {
     .filter((data: any) => !data.isPrimaryKey)
     .map((data: any) => ({
       dataValue: data.dataValue[rowIndex],
-      dataName: data.dataName,
+      dataName: data.attributeName,
       dataId: data.dataId,
       dataType: dataType.dataTypeName
     }));

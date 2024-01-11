@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Suppression } from '../../../../../../interfaces/suppression';
+import {environment} from "../../../../../../../environment/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Suppression } from '../../../../../../interfaces/suppression';
 export class PostSuppressionService {
   constructor(private httpClient: HttpClient) { }
 
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = environment.api_right;
 
   postSuppression(suppression: Suppression): Observable<Suppression> {
     return this.httpClient.post<Suppression>(`${this.baseUrl}/right/postAccessRequest`, suppression);

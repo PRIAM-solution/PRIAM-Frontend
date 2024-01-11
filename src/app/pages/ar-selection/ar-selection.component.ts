@@ -7,7 +7,6 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { IndirectGeneratedDataList } from '../../interfaces/indirect-generated-data-list';
 import { AccessRequest } from '../../interfaces/access-request';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { INDIRECT_GENERATED_DATA_LIST } from './exemple-tempo';
 
 @Component({
   selector: 'app-ar-selection',
@@ -24,9 +23,9 @@ export class ArSelectionComponent implements OnInit {
     private _snackBar: MatSnackBar,
   ) {}
 
-  referenceId: number = 0;
+  referenceId: number = 606;
   selectAll: boolean = false;
-  indirectGeneratedDataList: IndirectGeneratedDataList[] = INDIRECT_GENERATED_DATA_LIST;
+  indirectGeneratedDataList: IndirectGeneratedDataList[] = [];
   dataRequestClaim: string = '';
 
   ngOnInit() {
