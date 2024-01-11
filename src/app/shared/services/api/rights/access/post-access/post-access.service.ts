@@ -10,7 +10,7 @@ import {environment} from "../../../../../../../environment/environment";
 export class PostAccessService {
   constructor(private httpClient: HttpClient) { }
 
-  private baseUrl = environment.api_right;
+  private baseUrl = environment.api_data;
 
   postAccessRequest(accessRequest: AccessRequest): Observable<AccessRequest> {
     return this.httpClient.post<AccessRequest>(`${this.baseUrl}/right/postAccessRequest`, accessRequest);
