@@ -60,7 +60,7 @@
       <td>{{ actor.secondaryActorCategory.secondaryActorCategoryName }}</td>
       <td>{{ actor.country }}</td>
       <td>
-        <div *ngFor="let data of actor.data">
+        <div *ngFor="let data of actor.dataTransfers.data">
           {{ data.attributeName }}<br>
         </div>
       </td>
@@ -85,7 +85,7 @@
       <td>{{ actor.secondaryActorCategory.secondaryActorCategoryName }}</td>
       <td>{{ actor.country }}</td>
       <td>
-        <div *ngFor="let data of actor.data">
+        <div *ngFor="let data of actor.dataTransfers.data">
           {{ data.attributeName }}<br>
         </div>
       </td>

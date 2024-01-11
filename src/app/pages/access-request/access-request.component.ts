@@ -59,12 +59,10 @@ export class AccessRequestComponent implements OnInit {
     this.getAccessService.getPersonalDataListTransfer(this.idRef).subscribe(
       response => {
         this.dataListTransfer = response;
-        console.log(response)
-        console.log(this.dataListTransfer)
-        console.log(this.dataListTransfer[0].country)
+        console.log(this.dataListTransfer);
+        console.log("Datas : " + this.dataListTransfer[0].dataTransfers.data);
         this.euActors = this.dataListTransfer.filter(actor => this.euCountries.includes(actor.country));
         this.nonEuActors = this.dataListTransfer.filter(actor => !this.euCountries.includes(actor.country));
-        console.log(this.euActors)
 
         this.successErrorService.handleSuccess('getPersonalDataListTransfer', response);
       },
