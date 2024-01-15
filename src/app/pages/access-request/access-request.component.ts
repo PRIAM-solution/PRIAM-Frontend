@@ -1,11 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { GetAccessService } from '../../shared/services/api/rights/access/get-access/get-access.service';
-import { SuccessErrorService } from '../../shared/services/success-error/success-error.service';
-import { DataType } from '../../interfaces/data-list';
-import { Processing } from '../../interfaces/data-list-purpose';
-import { SecondaryActor } from '../../interfaces/data-list-transfer';
-import { PrimaryKey } from '../../interfaces/rectification';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {Component, OnInit, Inject} from '@angular/core';
+import {GetAccessService} from '../../shared/services/api/rights/access/get-access/get-access.service';
+import {SuccessErrorService} from '../../shared/services/success-error/success-error.service';
+import {DataType} from '../../interfaces/data-list';
+import {Processing} from '../../interfaces/data-list-purpose';
+import {SecondaryActor} from '../../interfaces/data-list-transfer';
+import {PrimaryKey} from '../../interfaces/rectification';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {
   MatDialogModule,
   MatDialog,
@@ -13,7 +13,7 @@ import {
   MatDialogTitle,
   MatDialogContent,
 } from '@angular/material/dialog';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-access-request',
@@ -27,12 +27,13 @@ export class AccessRequestComponent implements OnInit {
     private successErrorService: SuccessErrorService,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
-  ) {}
+  ) {
+  }
 
   referenceId: number = 606;
   dataList: DataType[] = [];
   dataListByPurpose: Processing[] = [];
-  dataListTransfer : SecondaryActor[] = [];
+  dataListTransfer: SecondaryActor[] = [];
   euCountries = ['Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden'];
   euActors: SecondaryActor[] = this.dataListTransfer.filter(actor => this.euCountries.includes(actor.country));
   nonEuActors: SecondaryActor[] = this.dataListTransfer.filter(actor => !this.euCountries.includes(actor.country));
@@ -97,21 +98,21 @@ export class AccessRequestComponent implements OnInit {
     this.getAccessService.primaryKeys = dataType.data
       .filter((data: any) => data.isPrimaryKey)
       .map((data: any) => ({
-        primaryKeyValue: data.dataValue[rowIndex],
-        primaryKeyName: data.attributeName
-      }
-    ));
+          primaryKeyValue: data.dataValue[rowIndex],
+          primaryKeyName: data.attributeName
+        }
+      ));
   }
 
   getNonPrimaryKeysData(dataType: any, rowIndex: number) {
-  this.getAccessService.nonPrimaryKeys = dataType.data
-    .filter((data: any) => !data.isPrimaryKey)
-    .map((data: any) => ({
-      dataValue: data.dataValue[rowIndex],
-      dataName: data.attributeName,
-      dataId: data.dataId,
-      dataType: dataType.dataTypeName
-    }));
+    this.getAccessService.nonPrimaryKeys = dataType.data
+      .filter((data: any) => !data.isPrimaryKey)
+      .map((data: any) => ({
+        dataValue: data.dataValue[rowIndex],
+        dataName: data.attributeName,
+        dataId: data.dataId,
+        dataType: dataType.dataTypeName
+      }));
   }
 }
 
@@ -122,5 +123,6 @@ export class AccessRequestComponent implements OnInit {
   imports: [MatDialogModule, CommonModule],
 })
 export class DialogAdditionalData {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 }
