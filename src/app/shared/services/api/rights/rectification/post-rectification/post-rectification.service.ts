@@ -13,6 +13,6 @@ export class PostRectificationService {
   private baseUrl = environment.api_right;
 
   postRectification(rectification: Rectification): Observable<Rectification> {
-    return this.httpClient.post<Rectification>(`${this.baseUrl}/right/postAccessRequest`, rectification);
+    return this.httpClient.post<Rectification>(`${this.baseUrl}/right/rectificationRequest`, rectification);
   }
 }

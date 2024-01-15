@@ -13,6 +13,6 @@ export class PostSuppressionService {
   private baseUrl = environment.api_right;
 
   postSuppression(suppression: Suppression): Observable<Suppression> {
-    return this.httpClient.post<Suppression>(`${this.baseUrl}/right/postAccessRequest`, suppression);
+    return this.httpClient.post<Suppression>(`${this.baseUrl}/right/rectificationRequest`, suppression);
   }
 }
