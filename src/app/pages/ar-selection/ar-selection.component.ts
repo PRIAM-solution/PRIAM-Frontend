@@ -50,15 +50,15 @@ export class ArSelectionComponent implements OnInit {
 
   onChange($event: MatSlideToggleChange, toggleName: string, dataType: any, data: any) {
     this.selectAll = this.slideToggleService.onChange(this.indirectGeneratedDataList, $event, toggleName, dataType, data);
-    console.log("onChange(", $event.checked, ",", toggleName, ",", dataType.dataTypeName, ",", data.dataName, "): ", this.indirectGeneratedDataList);
+    console.log(data)
+    console.log("onChange(", $event.checked, ",", toggleName, ",", dataType.dataTypeName, ",", data.attributeName, "): ", this.indirectGeneratedDataList);
   }
 
   postAccessRequest() {
     const accessRequest: AccessRequest = {
       dataSubjectId: 0,
       data: this.indirectGeneratedDataList
-        .flatMap(dataType => dataType.data.filter(data => data.selected))
-        .map(selectedData => ({ dataId: selectedData.dataId })),
+        .flatMap(dataType => dataType.data.filter(data => data.selected)),
       dataRequestClaim: this.dataRequestClaim,
     };
 
