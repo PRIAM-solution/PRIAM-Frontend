@@ -35,8 +35,8 @@ export class AccessRequestComponent implements OnInit {
   dataListByPurpose: Processing[] = [];
   dataListTransfer: SecondaryActor[] = [];
   euCountries = ['Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden'];
-  euActors: SecondaryActor[] = this.dataListTransfer.filter(actor => this.euCountries.includes(actor.country));
-  nonEuActors: SecondaryActor[] = this.dataListTransfer.filter(actor => !this.euCountries.includes(actor.country));
+  euActors: SecondaryActor[] = this.dataListTransfer.filter(actor => this.euCountries.includes(actor.country.countryName));
+  nonEuActors: SecondaryActor[] = this.dataListTransfer.filter(actor => !this.euCountries.includes(actor.country.countryName));
 
   ngOnInit() {
     this.getPersonalDataList();
@@ -72,8 +72,8 @@ export class AccessRequestComponent implements OnInit {
     this.getAccessService.getPersonalDataListTransfer(this.referenceId).subscribe(
       response => {
         this.dataListTransfer = response;
-        this.euActors = this.dataListTransfer.filter(actor => this.euCountries.includes(actor.country));
-        this.nonEuActors = this.dataListTransfer.filter(actor => !this.euCountries.includes(actor.country));
+        this.euActors = this.dataListTransfer.filter(actor => this.euCountries.includes(actor.country.countryName));
+        this.nonEuActors = this.dataListTransfer.filter(actor => !this.euCountries.includes(actor.country.countryName));
         this.successErrorService.handleSuccess('getPersonalDataListTransfer', response);
       },
       error => {
@@ -91,7 +91,7 @@ export class AccessRequestComponent implements OnInit {
   }
 
   hasActorOutsideEu(dataList: SecondaryActor[]): boolean {
-    return dataList.some(actor => !this.euCountries.includes(actor.country));
+    return dataList.some(actor => !this.euCountries.includes(actor.country.countryName));
   }
 
   getPrimaryKeys(dataType: any, rowIndex: number) {

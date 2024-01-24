@@ -8,7 +8,7 @@
       <thead>
       <tr>
         <th *ngFor="let data of dataType.data">
-          {{ data.attributeName }}
+          {{ data.dataName }}
           <button mat-flat-button color="primary" (click)="openDialogAdditionalData(data)"><i class="material-icons">question_mark</i>
           </button>
         </th>
@@ -55,7 +55,7 @@
         <div *ngFor="let purpose of item.purposes">{{ purpose.purposeDescription }}</div>
       </td>
       <td>
-        <div *ngFor="let data of item.data">{{ data.attributeName }}</div>
+        <div *ngFor="let data of item.data">{{ data.dataName }}</div>
       </td>
     </tr>
     </tbody>
@@ -80,12 +80,12 @@
     </thead>
     <tbody>
     <tr *ngFor="let actor of euActors">
-      <td>{{ actor.name }}</td>
+      <td>{{ actor.secondaryActorName }}</td>
       <td>{{ actor.secondaryActorCategory.secondaryActorCategoryName }}</td>
-      <td>{{ actor.country }}</td>
+      <td>{{ actor.country.countryName }}</td>
       <td>
         <div *ngFor="let data of actor.dataTransfers.data">
-          {{ data.attributeName }}<br>
+          {{ data.dataName }}<br>
         </div>
       </td>
     </tr>
@@ -106,12 +106,12 @@
     </thead>
     <tbody>
     <tr *ngFor="let actor of nonEuActors">
-      <td>{{ actor.name }}</td>
+      <td>{{ actor.secondaryActorName }}</td>
       <td>{{ actor.secondaryActorCategory.secondaryActorCategoryName }}</td>
-      <td>{{ actor.country }}</td>
+      <td>{{ actor.country.countryName }}</td>
       <td>
         <div *ngFor="let data of actor.dataTransfers.data">
-          {{ data.attributeName }}<br>
+          {{ data.dataName }}<br>
         </div>
       </td>
       <td>{{ actor.safeguardType }}</td>

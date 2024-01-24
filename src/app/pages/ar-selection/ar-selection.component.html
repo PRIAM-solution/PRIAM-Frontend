@@ -12,7 +12,7 @@
         <td><mat-slide-toggle [checked]="dataType.selected" (change)="onChange($event, 'dataType', dataType, '')">{{ dataType.dataTypeName }}</mat-slide-toggle></td>
         <td>
           <div *ngFor="let data of dataType.data">
-            <mat-slide-toggle [checked]="data.selected" (change)="onChange($event, 'data', dataType, data)">{{ data.attributeName }}</mat-slide-toggle>
+            <mat-slide-toggle [checked]="data.selected" (change)="onChange($event, 'data', dataType, data)">{{ data.dataName }}</mat-slide-toggle>
           </div>
         </td>
       </tr>

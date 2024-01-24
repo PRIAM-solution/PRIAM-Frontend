@@ -3,7 +3,7 @@ interface DataTransfer {
 }
 
 interface Data {
-  attributeName: string;
+  dataName: string;
 }
 
 interface SecondaryActorCategory {
@@ -11,10 +11,17 @@ interface SecondaryActorCategory {
   secondaryActorCategoryName: string;
 }
 
+interface Country {
+  countryId: number;
+  countryName: string;
+  minorAge: number;
+  adequate: boolean;
+}
+
 export interface SecondaryActor {
-  name: string;
+  secondaryActorName: string;
   secondaryActorCategory: SecondaryActorCategory;
-  country: string;
+  country: Country;
   dataTransfers: DataTransfer;
   safeguard?: any; // A MODIFIER POUR GERER PDF
   safeguardType?: string;

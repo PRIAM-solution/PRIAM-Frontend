@@ -1,6 +1,6 @@
 interface Data {
   dataId: number;
-  attributeName: string;
+  dataName: string;
   selected: boolean;
 }
 
