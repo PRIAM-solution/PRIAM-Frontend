@@ -53,7 +53,7 @@ export class RectificationComponent {
 
 postRectification() {
   const rectification: Rectification = {
-    dataSubjectId: 0,
+    dataSubjectId: 1,
     dataTypeName: this.getDataTypeName(this.selectedKey),
     data: {dataId: this.getDataId(this.selectedKey)},
     newValue: this.newValue,

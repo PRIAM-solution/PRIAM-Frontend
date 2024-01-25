@@ -99,7 +99,7 @@ export class AccessRequestComponent implements OnInit {
       .filter((data: any) => data.isPrimaryKey)
       .map((data: any) => ({
           primaryKeyValue: data.dataValue[rowIndex],
-          primaryKeyName: data.attributeName
+          primaryKeyName: data.dataName
         }
       ));
   }
@@ -109,7 +109,7 @@ export class AccessRequestComponent implements OnInit {
       .filter((data: any) => !data.isPrimaryKey)
       .map((data: any) => ({
         dataValue: data.dataValue[rowIndex],
-        dataName: data.attributeName,
+        dataName: data.dataName,
         dataId: data.dataId,
         dataType: dataType.dataTypeName
       }));
