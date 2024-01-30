@@ -52,7 +52,7 @@ export class SuppressionComponent {
 
   postSuppression() {
     const suppression: Suppression = {
-      dataSubjectId: 0,
+      dataSubjectId: 1,
       dataTypeName: this.getDataTypeName(this.selectedKey),
       data: {dataId: this.getDataId(this.selectedKey)},
       claim: this.userClaim,
