@@ -56,7 +56,7 @@ export class ArSelectionComponent implements OnInit {
 
   postAccessRequest() {
     const accessRequest: AccessRequest = {
-      dataSubjectId: 0,
+      dataSubjectId: 1,
       data: this.indirectGeneratedDataList
         .flatMap(dataType => dataType.data.filter(data => data.selected)),
       dataRequestClaim: this.dataRequestClaim,

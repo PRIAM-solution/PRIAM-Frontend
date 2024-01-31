@@ -14,7 +14,6 @@ export class PostAccessService {
   private baseUrl = environment.api_right;
 
   postAccessRequest(accessRequest: AccessRequest): Observable<AccessRequest> {
-    console.log(accessRequest)
     return this.httpClient.post<AccessRequest>(`${this.baseUrl}/right/accessRequest`, accessRequest);
   }
 }
