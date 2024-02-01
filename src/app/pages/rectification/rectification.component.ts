@@ -61,8 +61,6 @@ postRectification() {
     primaryKeys: this.getAccessService.primaryKeys,
   };
 
-  console.log(rectification);
-
   this.postRectificationService.postRectification(rectification).subscribe(
     response => {
       const message = 'Success!';
