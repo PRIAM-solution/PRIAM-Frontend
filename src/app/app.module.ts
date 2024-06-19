@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 // DEFAULT
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CommonModule } from '@angular/common';
 // ANGULAR MATERIALS
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -30,6 +31,26 @@ import { ArSelectionComponent } from './pages/ar-selection/ar-selection.componen
 import { RightsComponent } from './pages/rights/rights.component';
 import { RectificationComponent } from './pages/rectification/rectification.component';
 import { SuppressionComponent } from './pages/suppression/suppression.component';
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+import { environment } from "../environment/environment"
+
+export function kcFactory(kcService: KeycloakService){
+  return() => {
+    kcService.init({
+      config: {
+        realm: "priam-realm",
+        clientId: "Data-client",
+        url: environment.keycloak
+      },
+      initOptions:{
+        onLoad: "login-required",
+        checkLoginIframe : true
+      }
+      }
+
+    )
+  }
+}
 
 @NgModule({
   declarations: [
@@ -52,6 +73,7 @@ import { SuppressionComponent } from './pages/suppression/suppression.component'
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    KeycloakAngularModule,
     MatToolbarModule,
     MatGridListModule,
     MatButtonModule,
@@ -63,8 +85,11 @@ import { SuppressionComponent } from './pages/suppression/suppression.component'
     MatSelectModule,
     MatSnackBarModule,
     MatDialogModule,
+    CommonModule,
   ],
-  providers: [],
+  providers: [
+    {provide: APP_INITIALIZER, deps: [KeycloakService], useFactory: kcFactory, multi : true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

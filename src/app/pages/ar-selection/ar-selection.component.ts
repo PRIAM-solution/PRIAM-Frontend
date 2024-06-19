@@ -23,7 +23,7 @@ export class ArSelectionComponent implements OnInit {
     private _snackBar: MatSnackBar,
   ) {}
 
-  referenceId: number = 606;
+  referenceId: number = 507;
   selectAll: boolean = false;
   indirectGeneratedDataList: IndirectGeneratedDataList[] = [];
   dataRequestClaim: string = '';

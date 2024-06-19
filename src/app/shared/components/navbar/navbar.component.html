@@ -5,15 +5,15 @@
   <a mat-button routerLink="/consent" routerLinkActive="active-link">Consent</a>
   <span style="flex: 1 1 auto;"></span>
   <button mat-button [matMenuTriggerFor]="beforeMenu" [ngClass]="{'active-link': currentUrl === '/login'}">
-    <span style="display: flex; align-items: center;">
-      User
+    <a class="nav-link" *ngIf="securityService.profile">
+      <a *ngIf="securityService.profile">{{securityService.profile.firstName}}</a>
       <i class="material-icons" style="font-size: 4vh;">person</i>
-    </span>
+    </a>
   </button>
 
-  <mat-menu #beforeMenu="matMenu" xPosition="before">
+  <mat-menu #beforeMenu="matMenu" xPosition="before" >
     <a mat-menu-item routerLink="/login">Profile</a>
-    <a mat-menu-item routerLink="/login">Disconnect</a>
+    <a mat-menu-item routerLink="/login" (click)="onLogout()">Logout</a>
   </mat-menu>
 
 </mat-toolbar>

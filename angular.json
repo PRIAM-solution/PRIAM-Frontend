@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "user-priam:build:production"
+              "buildTarget": "user-priam:build:production"
             },
             "development": {
-              "browserTarget": "user-priam:build:development"
+              "buildTarget": "user-priam:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "user-priam:build"
+            "buildTarget": "user-priam:build"
           }
         },
         "test": {
@@ -95,8 +95,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": false
   }
 }

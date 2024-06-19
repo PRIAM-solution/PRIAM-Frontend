@@ -6,6 +6,7 @@ ARG API_DATA="localhost:8081"
 ARG API_RIGHT="localhost:8083"
 ARG API_ACTOR="localhost:8082"
 ARG API_PROVIDER="localhost:8086"
+ARG KEYCLOAK="localhost:8080"
 
 WORKDIR /app
 
@@ -22,7 +23,8 @@ RUN <<EOF
         api_data: 'http://${API_DATA}/api',
         api_right: 'http://${API_RIGHT}/api',
         api_actor: 'http://${API_ACTOR}',
-        api_provider: 'http://${API_PROVIDER}'
+        api_provider: 'http://${API_PROVIDER}',
+        keycloak: 'http://${KEYCLOAK}'
       }
       " > /app/src/environment/environment.ts
 EOF

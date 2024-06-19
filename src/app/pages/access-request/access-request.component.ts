@@ -14,6 +14,7 @@ import {
   MatDialogContent,
 } from '@angular/material/dialog';
 import {CommonModule} from '@angular/common';
+import {SecurityService} from "../../shared/services/security.service";
 
 @Component({
   selector: 'app-access-request',
@@ -27,10 +28,12 @@ export class AccessRequestComponent implements OnInit {
     private successErrorService: SuccessErrorService,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
+    public securityService: SecurityService,
   ) {
   }
 
-  referenceId: number = 606;
+
+  referenceId: number | null = this.securityService.getIdReference()
   dataList: DataType[] = [];
   dataListByPurpose: Processing[] = [];
   dataListTransfer: SecondaryActor[] = [];
@@ -45,6 +48,7 @@ export class AccessRequestComponent implements OnInit {
   }
 
   getPersonalDataList() {
+    if (this.referenceId != null)
     this.getAccessService.getPersonalDataList(this.referenceId).subscribe(
       response => {
         this.dataList = response;
@@ -57,6 +61,7 @@ export class AccessRequestComponent implements OnInit {
   }
 
   getPersonalDataListByPurpose() {
+    if (this.referenceId != null)
     this.getAccessService.getPersonalDataListByPurpose(this.referenceId).subscribe(
       response => {
         this.dataListByPurpose = response;
@@ -69,6 +74,7 @@ export class AccessRequestComponent implements OnInit {
   }
 
   getPersonalDataListTransfer() {
+    if (this.referenceId != null)
     this.getAccessService.getPersonalDataListTransfer(this.referenceId).subscribe(
       response => {
         this.dataListTransfer = response;
