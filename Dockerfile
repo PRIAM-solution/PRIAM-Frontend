@@ -29,11 +29,4 @@ RUN <<EOF
       " > /app/src/environment/environment.ts
 EOF
 
-RUN npm run build
-
-# Image d'Appache
-FROM httpd
-
-EXPOSE 80
-
-COPY --from=builder /app/dist/user-priam/ /usr/local/apache2/htdocs/
+CMD [ "npm", "start" ]
