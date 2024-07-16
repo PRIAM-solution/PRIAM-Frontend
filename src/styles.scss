@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body {
-  height: 100vh;
+  height: 100dvh;
 }
 
 body {
@@ -9,8 +9,8 @@ body {
 }
 
 .content-container {
-  margin: 2vh;
-  min-height: 82.3vh;
+  height: calc(88dvh - 30px * 2);
+  padding: 30px;
 }
 
 a {
@@ -46,6 +46,6 @@ table th {
 }
 
 table tbody tr:hover {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.1);
   transition: 0.3s ease;
 }

@@ -2,3 +2,11 @@
   background-color: dodgerblue;
   transition: background-color 0.3s ease-in-out;
 }
+
+a {
+  margin: 10px;
+}
+
+.base {
+  height: 6dvh;
+}

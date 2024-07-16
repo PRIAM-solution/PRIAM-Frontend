@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 // DEFAULT
 import { AppRoutingModule } from './app-routing.module';
@@ -31,25 +31,23 @@ import { ArSelectionComponent } from './pages/ar-selection/ar-selection.componen
 import { RightsComponent } from './pages/rights/rights.component';
 import { RectificationComponent } from './pages/rectification/rectification.component';
 import { SuppressionComponent } from './pages/suppression/suppression.component';
-import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
-import { environment } from "../environment/environment"
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { environment } from '../environment/environment';
 
-export function kcFactory(kcService: KeycloakService){
-  return() => {
+export function kcFactory(kcService: KeycloakService) {
+  return () => {
     kcService.init({
       config: {
-        realm: "priam-realm",
-        clientId: "Data-client",
-        url: environment.keycloak
+        realm: 'priam-realm',
+        clientId: 'Data-client',
+        url: environment.keycloak,
       },
-      initOptions:{
-        onLoad: "login-required",
-        checkLoginIframe : true
-      }
-      }
-
-    )
-  }
+      initOptions: {
+        onLoad: 'login-required',
+        checkLoginIframe: true,
+      },
+    });
+  };
 }
 
 @NgModule({
@@ -88,8 +86,13 @@ export function kcFactory(kcService: KeycloakService){
     CommonModule,
   ],
   providers: [
-    {provide: APP_INITIALIZER, deps: [KeycloakService], useFactory: kcFactory, multi : true}
+    {
+      provide: APP_INITIALIZER,
+      deps: [KeycloakService],
+      useFactory: kcFactory,
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

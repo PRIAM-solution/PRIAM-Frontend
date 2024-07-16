@@ -1,0 +1,63 @@
+<div class="title"><h1>Consent</h1></div>
+<hr>
+<div class="container" *ngIf="dataList && dataList.length > 0; else noData">
+  <table>
+    <tbody *ngFor="let data of dataList">
+        <tr>
+          <td class="td">
+            {{ data.processingName }}
+          </td>
+          <td>
+            <mat-slide-toggle [disabled]="isDisable(data)"> </mat-slide-toggle>
+
+            <button class="btn" mat-flat-button (click)="open(data)">
+              <i class="material-icons">more_vert</i>
+            </button>
+          </td>
+        </tr>
+        <tr class="tr" *ngIf="devs[data.processingId]">
+          <td>
+            Informations for {{ data.processingName }}
+            <ul>
+              <li *ngIf="data.modifiedAt">Edited at {{ data.modifiedAt }}</li>
+              <li *ngIf="data.purposes.length > 0">
+                Purposes:
+                <ul *ngFor="let purpose of data.purposes">
+                  <li>
+                    {{ purpose.purposeDescription }} ({{ purpose.purposeType }})
+                  </li>
+                </ul>
+              </li>
+              <li *ngIf="data.dataUsages.length > 0">
+                Data:
+
+                <table>
+                  <thead>
+                    <th></th>
+                    <th>Create</th>
+                    <th>Read</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                  </thead>
+                  <tbody *ngFor="let dataUsage of data.dataUsages">
+                    <tr>
+                      <td>{{ dataUsage.data.dataName }}</td>
+                      <td>{{ dataUsage.c ? "X" : "" }}</td>
+                      <td>{{ dataUsage.r ? "X" : "" }}</td>
+                      <td>{{ dataUsage.u ? "X" : "" }}</td>
+                      <td>{{ dataUsage.d ? "X" : "" }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </td>
+          <td></td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noData>
+  <p>No data available.</p>
+</ng-template>

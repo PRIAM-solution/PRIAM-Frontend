@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1.4.0
-FROM node:22 as builder
+FROM node:22 AS builder
 
 # Options
 ARG API_DATA="localhost:8081"

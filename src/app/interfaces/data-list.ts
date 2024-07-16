@@ -1,4 +1,4 @@
-interface Data {
+export interface Data {
   dataId: number;
   dataName: string;
   dataValue: any;
