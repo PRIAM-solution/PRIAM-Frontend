@@ -13,10 +13,10 @@ export interface Processing {
 }
 
 export enum ProcessingType {
-  DEFAULT,
-  NECESSARY,
-  MANDATORY,
-  OPTIONAL,
+  DEFAULT = "DEFAULT",
+  NECESSARY = "NECESSARY",
+  MANDATORY = "MANDATORY",
+  OPTIONAL = "OPTIONAL",
 }
 
 export enum ProcessingCategory {

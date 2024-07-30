@@ -6,7 +6,7 @@
   <span style="flex: 1 1 auto;"></span>
   <button mat-button [matMenuTriggerFor]="beforeMenu" [ngClass]="{'active-link': currentUrl === '/login'}">
     <a class="nav-link" *ngIf="securityService.profile">
-      <a *ngIf="securityService.profile">{{securityService.profile.firstName}}</a>
+      <a *ngIf="securityService.profile">{{securityService.profile.firstName}} <706></a>
       <i class="material-icons" style="font-size: 4vh;">person</i>
     </a>
   </button>

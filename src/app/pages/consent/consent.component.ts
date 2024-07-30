@@ -30,12 +30,12 @@ export class ConsentComponent implements OnInit {
 
   referenceId: number | null = this.securityService.getIdReference();
   dataList: Processing[] = [];
+  optionalList: Processing[] = [];
+  necessaryList: Processing[] = [];
   devs: any = {};
 
   ngOnInit() {
     this.getProcessings();
-    //this.dataList = new Array(10).fill(undefined).map(() => generateurData());
-    //console.log(this.dataList);
   }
 
   getProcessings() {
@@ -43,6 +43,12 @@ export class ConsentComponent implements OnInit {
       .getProcessings()
       .subscribe((response: Processing[]) => {
         this.dataList = response;
+        this.optionalList = this.dataList.filter(
+          (a) => a.processingType === ProcessingType.OPTIONAL
+        );
+        this.necessaryList = this.dataList.filter(
+          (a) => a.processingType === ProcessingType.NECESSARY
+        );
       });
   }
 
@@ -55,6 +61,7 @@ export class ConsentComponent implements OnInit {
   }
 
   isDisable(data: Processing) {
+    console.log(data.processingType);
     return data.processingType === ProcessingType.MANDATORY ||
       data.processingType === ProcessingType.NECESSARY
       ? true
@@ -62,7 +69,6 @@ export class ConsentComponent implements OnInit {
   }
 
   open(data: Processing) {
-    console.log('test');
     this.devs[data.processingId] =
       this.devs[data.processingId] !== undefined
         ? !this.devs[data.processingId]
